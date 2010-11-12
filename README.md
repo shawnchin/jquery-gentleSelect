@@ -24,7 +24,7 @@ select boxes on DOM ready:
 
     <link type="text/css" src="gentleSelect/jquery-gentleSelect.min.css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-    <script type="text/javascript" src="gentleSelect/jquery-gentleSelect.min.js"></script>
+    <script type="text/javascript" src="gentleSelect/jquery-gentleSelect-min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
         $('#your-select-box-id').gentleSelect();
