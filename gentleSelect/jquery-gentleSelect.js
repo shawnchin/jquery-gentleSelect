@@ -32,6 +32,7 @@
         if (typeof obj == "undefined") { return false; }
         else { return true; }
     }
+
     function hasError(c, o) {
         if (c.attr("multiple") == true) {
             $.error("Sorry, gentleSelect does not work with multiple=true yet");
@@ -49,14 +50,6 @@
             $.error("gentleSelect: itemWidth must be supplied if 'rows' is specified");
             return true;
         }
-//         if (defined(o.itemWidth) && !defined(o.rows) && !defined(o.columns)) {
-//             $.error("gentleSelect: rows/columns not specified. itemWidth ignored");
-//             // Not critical error. do not return yet;
-//         }
-//         if (defined(o.minWidth) && (defined(o.columns) || defined(o.rows))) {
-//             $.error("gentleSelect: minWidth ignored when rows/columns specified");
-//             // Not critical error. do not return yet;
-//         }
         return false;
     }
 
