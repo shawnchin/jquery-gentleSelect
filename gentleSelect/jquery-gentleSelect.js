@@ -25,7 +25,7 @@
         itemWidth : undefined,
         columns   : undefined,
         rows      : undefined,
-        title     : undefined,
+        title     : undefined
     }
 
     function defined(obj) {
@@ -157,7 +157,7 @@
                 };
             });
             return this;
-        },
+        }
     };
 
     var event_handlers = {
