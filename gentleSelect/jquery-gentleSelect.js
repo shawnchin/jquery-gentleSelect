@@ -1,5 +1,6 @@
 /*
  * jQuery gentleSelect plugin
+ * http://shawnchin.github.com/jquery-gentleSelect
  *
  * Copyright (c) 2010 Shawn Chin. 
  * Licensed under the MIT license.
