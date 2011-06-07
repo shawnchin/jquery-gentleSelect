@@ -26,7 +26,12 @@
         itemWidth : undefined,
         columns   : undefined,
         rows      : undefined,
-        title     : undefined
+        title     : undefined,
+        openSpeed       : 400,
+        closeSpeed      : 400,
+        openEffect      : "slide",
+        closeEffect     : "slide",
+        hideOnMouseOut  : true
     }
 
     function defined(obj) {
@@ -49,6 +54,28 @@
         }
         if (defined(o.rows) && !defined(o.itemWidth)) {
             $.error("gentleSelect: itemWidth must be supplied if 'rows' is specified");
+            return true;
+        }
+        if (!defined(o.openSpeed) || typeof o.openSpeed != "number" && 
+                (typeof o.openSpeed == "string" && (o.openSpeed != "slow" && o.openSpeed != "fast"))) { 
+            $.error("gentleSelect: openSpeed must be an integer or \"slow\" or \"fast\"");
+            return true;
+        }
+        if (!defined(o.closeSpeed) || typeof o.closeSpeed != "number" && 
+                (typeof o.closeSpeed == "string" && (o.closeSpeed != "slow" && o.closeSpeed != "fast"))) { 
+            $.error("gentleSelect: closeSpeed must be an integer or \"slow\" or \"fast\"");
+            return true;
+        }
+        if (!defined(o.openEffect) || (o.openEffect != "fade" && o.openEffect != "slide")) {
+            $.error("gentleSelect: openEffect must be either 'fade' or 'slide'!");
+            return true;
+        }
+        if (!defined(o.closeEffect)|| (o.closeEffect != "fade" && o.closeEffect != "slide")) {
+            $.error("gentleSelect: closeEffect must be either 'fade' or 'slide'!");
+            return true;
+        }
+        if (!defined(o.hideOnMouseOut) || (typeof o.hideOnMouseOut != "boolean")) {
+            $.error("gentleSelect: hideOnMouseOut must be supplied and either \"true\" or \"false\"!");
             return true;
         }
         return false;
@@ -173,20 +200,32 @@
 
         labelClick : function() {
             var pos = $(this).position();
-            var dialog = $(this).data("root").data("dialog")
-                .css("top", pos.top + $(this).data("root").height())
-                .css("left", pos.left + 1)
-                .slideDown();
-
+            var root = $(this).data("root");
+            var opts = root.data("options");
+            var dialog = root.data("dialog")
+                .css("top", pos.top + root.height())
+                .css("left", pos.left + 1);
+            if (opts.openEffect == "fade") {
+                dialog.fadeIn(opts.openSpeed);
+            } else {
+                dialog.slideDown(opts.openSpeed);
+            }
         },
     
         dialogHoverOut : function() {
-            $(this).hide();
+            if ($(this).data("root").data("options").hideOnMouseOut) {
+                $(this).hide();
+            }
         },
 
         dialogClick : function(e) {
             var clicked = $(e.target);
-            $(this).fadeOut("fast"); // hide dialog
+            var opts = $(this).data("root").data("options");
+            if (opts.closeEffect == "fade") {
+                $(this).fadeOut(opts.closeSpeed);
+            } else {
+                $(this).slideUp(opts.closeSpeed);
+            }
 
             if (clicked.is("li") && !clicked.hasClass("gentleselect-dummy")) {
                 var value = clicked.data("value");
