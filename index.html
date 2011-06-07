@@ -97,12 +97,6 @@
         <option value="12">Cumquat</option>
     </select>
     </p>
-    <p>
-    This plugin was developed to fulfil the requirements that arose from the 
-    <a href='http://github.com/shawnchin/bbotui'>BBotUI</a> Project. 
-    As such, while we do try to make the implementation as generic as possible, we dare not 
-    claim this plugin to be as flexible as one would expect a sensible jQuery plugin to be.
-    </p>
 
     <p>
     There is much to be done on the flexibility and robustness front, and we welcome contributions 
@@ -160,7 +154,7 @@
     </p>
     <h2>Options</h2>
 
-    <h3>title</h3>
+    <h3 id='option-title'>title</h3>
     <p>
     You can specify a heading for the selection box using the <tt>title</tt> option.
     </p>
@@ -176,7 +170,7 @@
         title: "Select a colour"
     });</pre>
     </p>
-    <h3>columns &amp; itemWidth</h3>
+    <h3 id='option-columns'>columns &amp; itemWidth</h3>
     <p>
     Specifies the number of columns used to display the selection. The number of rows is
     calculated accordingly. When specifying <tt>columns</tt>, the <tt>itemWidth</tt> option must also be set. This value must be large enough
@@ -205,7 +199,7 @@
         itemWidth: 100,
     });</pre>
 
-    <h3>rows &amp; itemWidth</h3>
+    <h3 id='option-rows'>rows &amp; itemWidth</h3>
     <p>
     There may be situations where one might think it would be more suitable to fix the
     number of rows instead, allowing the columns to spread out as required.
@@ -256,13 +250,13 @@
         itemWidth: 30,
     });</pre>
 
-    <h3>openEffect &amp; closeEffect</h3>
+    <h3 id='option-effect'>openEffect &amp; closeEffect</h3>
     <p>
     Effects to use for displaying and hiding the selection menu. 
     Possible options are <tt>'fade'</tt> and <tt>'slide'</tt> (default).
     </p>
 
-    <h3>openSpeed &amp; closeSpeed</h3>
+    <h3 id='option-speed'>openSpeed &amp; closeSpeed</h3>
     <p>
     Specifies the speed of the open/close animation. 
     This value is specified in milliseconds; higher values indicate slower animations, not faster ones.
@@ -296,7 +290,7 @@
         openSpeed: "slow"
     });</pre>
 
-    <h3>hideOnMouseOut</h3>
+    <h3 id='option-mouseout'>hideOnMouseOut</h3>
     <p>
     Specifies whether the selection menu should be hidden when the mouse leaves the selection box.
     This is <tt>true</tt> by default. Set to <tt>false</tt> to disable this behaviour.
@@ -325,7 +319,7 @@
         hideOnMouseOut: false
     });</pre>
     <h2>Methods</h2>
-    <h3>update</h3>
+    <h3 id='method-update'>update</h3>
     <p>
     If you update the value of the select box using an external script,
     you can update the display by calling the <tt>update</tt> function.
