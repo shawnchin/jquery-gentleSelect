@@ -4,7 +4,7 @@
     <title>jquery-gentleSelect : a jQuery plugin</title>
     <link type="text/css" href="gentleSelect/jquery-gentleSelect.css" rel="stylesheet" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-    <script type="text/javascript" src="gentleSelect/jquery-gentleSelect-min.js"></script>
+    <script type="text/javascript" src="gentleSelect/jquery-gentleSelect.js"></script>
 
     <style>
     * { margin: 0; padding: 0; }
@@ -25,7 +25,8 @@
         $('#example1').gentleSelect({ 
             columns: 3,
             itemWidth: 100,
-            title: "Select a fruit"
+            title: "Select a fruit",
+		hideOnMouseOut: true
         });
         $('#example-title').gentleSelect({
             title: "Select a colour"
@@ -38,6 +39,17 @@
         $('#example4').gentleSelect({ 
             rows: 5,
             itemWidth: 30
+        });
+        $('#example5').gentleSelect({ 
+            columns: 3,
+            itemWidth: 100,
+            openEffect: "fade",
+            openSpeed: "slow"
+        });
+        $('#example6').gentleSelect({ 
+            columns: 3,
+            itemWidth: 100,
+            hideOnMouseOut: false
         });
     });
     </script>
@@ -108,8 +120,6 @@
         <li>calculate default <tt>itemWidth</tt> automatically when <tt>columns</tt> or <tt>rows</tt> specified</li>
         <li>implement option to fix width of select box (based on longest entry)</li>
         <li>implement option to add CSS class (simplify customisation)</li>
-        <li>implement option to disable hide on mouse out</li>
-        <li>implement option to change effect used to display selection</li>
     </ul>
     <h2>Usage</h2>
 
@@ -246,12 +256,82 @@
         itemWidth: 30,
     });</pre>
 
+    <h3>openEffect &amp; closeEffect</h3>
+    <p>
+    Effects to use for displaying and hiding the selection menu. 
+    Possible options are <tt>'fade'</tt> and <tt>'slide'</tt> (default).
+    </p>
+
+    <h3>openSpeed &amp; closeSpeed</h3>
+    <p>
+    Specifies the speed of the open/close animation. 
+    This value is specified in milliseconds; higher values indicate slower animations, not faster ones.
+    The strings <tt>'slow'</tt> and <tt>'fast'</tt> can be supplied to indicate an animation duration of 
+    <tt>600</tt> and <tt>200</tt> milliseconds.
+    </p>
+
+    <p>The default value is <tt>400</tt>.</p>
+
+    <p>
+    For example, <select id='example5'>
+        <option value="1">Apple</option>
+        <option value="2">Orange</option>
+        <option value="3">Banana</option>
+        <option value="4">Mango</option>
+        <option value="5">Pineapple</option>
+        <option value="6">Guava</option>
+        <option value="7">Passion Fruit</option>
+        <option value="8">Sugar Cane</option>
+        <option value="9">Durian</option>
+        <option value="10">Plum</option>
+        <option value="11">Apricot</option>
+        <option value="12">Cumquat</option>
+    </select> can be implemented using:
+    </p>
+    <pre>
+    $('#selector').gentleSelect({
+        columns: 3,
+        itemWidth: 100,
+        openEffect: "fade",
+        openSpeed: "slow"
+    });</pre>
+
+    <h3>hideOnMouseOut</h3>
+    <p>
+    Specifies whether the selection menu should be hidden when the mouse leaves the selection box.
+    This is <tt>true</tt> by default. Set to <tt>false</tt> to disable this behaviour.
+    </p>
+
+    <p>
+    For example, <select id='example6'>
+        <option value="1">Apple</option>
+        <option value="2">Orange</option>
+        <option value="3">Banana</option>
+        <option value="4">Mango</option>
+        <option value="5">Pineapple</option>
+        <option value="6">Guava</option>
+        <option value="7">Passion Fruit</option>
+        <option value="8">Sugar Cane</option>
+        <option value="9">Durian</option>
+        <option value="10">Plum</option>
+        <option value="11">Apricot</option>
+        <option value="12">Cumquat</option>
+    </select> (menu only disappears when something is selected)
+    </p>
+    <pre>
+    $('#selector').gentleSelect({
+        columns: 3,
+        itemWidth: 100,
+        hideOnMouseOut: false
+    });</pre>
     <h2>Methods</h2>
     <h3>update</h3>
     <p>
     If you update the value of the select box using an external script,
     you can update the display by calling the <tt>update</tt> function.
     </p>
+
+    
     <pre>
     // assssuming gentleSelect() previously initialised
     $('#selector').val(3).gentleSelect("update");</pre>
