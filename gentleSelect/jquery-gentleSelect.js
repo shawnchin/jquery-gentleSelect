@@ -174,7 +174,7 @@
         labelClick : function() {
             var pos = $(this).position();
             var dialog = $(this).data("root").data("dialog")
-                .css("top", pos.top + $(this).data("root").height)
+                .css("top", pos.top + $(this).data("root").height())
                 .css("left", pos.left + 1)
                 .slideDown();
 
