@@ -26,8 +26,16 @@
             columns: 3,
             itemWidth: 100,
             title: "Select a fruit",
-		hideOnMouseOut: true
+	    hideOnMouseOut: true
         });
+        $('#example-multi').gentleSelect({ 
+            columns: 3,
+            itemWidth: 100,
+            title: "Select some fruit",
+            prompt: "Select some fruit",
+	    hideOnMouseOut: true
+        });
+        
         $('#example-title').gentleSelect({
             title: "Select a colour"
         });
@@ -60,9 +68,9 @@
 
     <h2>Intro</h2>
     <p>
-    gentleSelect is a <a href='http://jquery.com'>jQuery</a> plugin for transfoming select boxes into a skinnable alternative. 
-    The selection list can be rendered with multiple columns/rows to present larger datasets in 
-    a more manageable format.
+    gentleSelect is a <a href='http://jquery.com'>jQuery</a> plugin for transforming select boxes into a skinnable alternative. 
+    The selection list can be rendered with multiple columns/rows to present larger datasets in a more manageable format. It
+    recognizes the <tt>multiple</tt> attribute on select boxes and does the right thing automatically.
     </p>
 
     <p>
@@ -97,7 +105,23 @@
         <option value="12">Cumquat</option>
     </select>
     </p>
-
+    <p>
+    And here's a version of that select box which supports multiple selections:
+    <select id='example-multi' multiple>
+        <option value="1">Apple</option>
+        <option value="2">Orange</option>
+        <option value="3">Banana</option>
+        <option value="4">Mango</option>
+        <option value="5">Pineapple</option>
+        <option value="6">Guava</option>
+        <option value="7">Passion Fruit</option>
+        <option value="8">Sugar Cane</option>
+        <option value="9">Durian</option>
+        <option value="10">Plum</option>
+        <option value="11">Apricot</option>
+        <option value="12">Cumquat</option>
+    </select>
+    </p>
     <p>
     There is much to be done on the flexibility and robustness front, and we welcome contributions 
     and bug fixes. Feel free to fork <a href='https://github.com/shawnchin/jquery-gentleSelect'>the project</a> 
@@ -110,10 +134,9 @@
     </ul>
     <h2>TODO</h2>
     <ul>
-        <li>Support for combo boxes (<tt>&lt;select multiple='true'&gt;</tt>)
         <li>calculate default <tt>itemWidth</tt> automatically when <tt>columns</tt> or <tt>rows</tt> specified</li>
         <li>implement option to fix width of select box (based on longest entry)</li>
-        <li>implement option to add CSS class (simplify customisation)</li>
+        <li>implement option to add CSS class (simplify customization)</li>
     </ul>
     <h2>Usage</h2>
 
