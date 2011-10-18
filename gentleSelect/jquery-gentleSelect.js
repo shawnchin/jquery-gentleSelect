@@ -28,7 +28,7 @@
         rows      : undefined,
         title     : undefined,
         prompt    : "Make A Selection",
-        maxDisplay: 4,  // set to 0 for unlimited
+        maxDisplay: 0,  // set to 0 for unlimited
         openSpeed       : 400,
         closeSpeed      : 400,
         openEffect      : "slide",
