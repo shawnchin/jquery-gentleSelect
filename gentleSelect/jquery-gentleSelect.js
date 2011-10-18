@@ -28,7 +28,7 @@
         rows      : undefined,
         title     : undefined,
         prompt    : "Make A Selection",
-        maxDisplay: 4,
+        maxDisplay: 4,  // set to 0 for unlimited
         openSpeed       : 400,
         closeSpeed      : 400,
         openEffect      : "slide",
@@ -79,6 +79,20 @@
         return false;
     }
 
+    function getSelectedAsText(elemList, opts) { 
+        // If no items selected, return prompt
+        if (elemList.length < 1) { return opts.prompt; }
+
+        // Truncate if exceed maxDisplay
+        if (opts.maxDisplay != 0 && elemList.length > opts.maxDisplay) {
+            var arr = elemList.slice(0, opts.maxDisplay).map(function(){return $(this).text();});
+            arr.push("...");
+        } else {
+            var arr = elemList.map(function(){return $(this).text();});
+        }
+        return arr.get().join(", ");
+    }
+
     var methods = {
         init : function(options) {
             var o = $.extend({}, defaults, options);
@@ -87,16 +101,7 @@
             this.hide(); // hide original select box
             
             // initialise <span> to replace select box
-            
-            // This way, we can handle multiple selections
-            var selected = this.find(":selected");
-            if(selected.length > o.maxDisplay)
-                var label_text = "Multiple Selections"
-            else if(selected.length < 1)
-                var label_text = o.prompt;
-            else
-                var label_text = selected.map(function(){return $(this).text();}).get().join(", ");
-            
+            label_text = getSelectedAsText(this.find(":selected"), o);
             var label = $("<span class='gentleselect-label'>" + label_text + "</span>")
                 .insertBefore(this)
                 .bind("mouseenter.gentleselect", event_handlers.labelHoverIn)
@@ -120,19 +125,12 @@
             var dialog = $("<div class='gentleselect-dialog'></div>")
                 .append(ul)
                 .insertAfter(label)
+                .bind("click.gentleselect", event_handlers.dialogClick)
                 .bind("mouseleave.gentleselect", event_handlers.dialogHoverOut)
                 .data("label", label)
                 .data("root", this);
             this.data("dialog", dialog);
            
-            if(this.attr("multiple")) {
-                dialog.data("multiple", true);
-                dialog.bind("click.gentleselect", event_handlers.multiselectDialogClick);
-            } else {
-                dialog.data("multiple", false);
-                dialog.bind("click.gentleselect", event_handlers.dialogClick);
-            }
-
             // if to be displayed in columns
             if (defined(o.columns) || defined(o.rows)) {
 
@@ -235,56 +233,33 @@
 
         dialogClick : function(e) {
             var clicked = $(e.target);
-            var opts = $(this).data("root").data("options");
+            var $this = $(this);
+            var opts = $this.data("root").data("options");
             if (opts.closeEffect == "fade") {
-                $(this).fadeOut(opts.closeSpeed);
+                $this.fadeOut(opts.closeSpeed);
             } else {
-                $(this).slideUp(opts.closeSpeed);
+                $this.slideUp(opts.closeSpeed);
             }
 
             if (clicked.is("li") && !clicked.hasClass("gentleselect-dummy")) {
                 var value = clicked.data("value");
                 var name = clicked.data("name");
-                var label = $(this).data("label")
-                    .text(name); // update label
+                var label = $this.data("label")
 
-                // update selected li
-                $(this).find("li.selected").removeClass("selected");
-                clicked.addClass("selected");
-                // update actual selectbox
-                var actual = $(this).data("root").val(value).trigger("change");
-                
-            }
-        },
-
-        multiselectDialogClick : function(e) {
-            var clicked = $(e.target);
-            var opts = $(this).data("root").data("options");
-            if (clicked.is("li") && !clicked.hasClass("gentleselect-dummy")) {
-                var value = clicked.data("value");
-                var name = clicked.data("name");
-                var label = $(this).data("label");
-            
-                // update selected li
-                if(clicked.hasClass("selected")) {
-                    clicked.removeClass("selected");
+                if ($this.data("root").attr("multiple")) {
+                    clicked.toggleClass("selected");
+                    var s = $this.find("li.selected");
+                    label.text(getSelectedAsText(s, opts));
+                    var v = s.map(function(){ return $(this).data("value"); });
+                    // update actual selectbox and trigger change event
+                    $this.data("root").val(v.get()).trigger("change");
                 } else {
+                    $this.find("li.selected").removeClass("selected");
                     clicked.addClass("selected");
+                    label.text(clicked.data("name"));
+                    // update actual selectbox and trigger change event
+                    $this.data("root").val(value).trigger("change");
                 }
-                
-                var selected = $(this).find("li.selected")
-                                    .map(function(){return $(this).data("value");}).get();
-                var selected_text = $(this).find("li.selected")
-                                    .map(function(){return $(this).text();}).get().sort().join(", ");
-                
-                if(selected.length > opts.maxDisplay)
-                    label.text("Multiple Selections")
-                else if(selected.length < 1)
-                    label.text(opts.prompt);
-                else
-                    label.text(selected_text);
-                
-                var actual = $(this).data("root").val(selected).trigger("change");
             }
         },
 
