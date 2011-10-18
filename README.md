@@ -5,11 +5,6 @@ a skinnable alternative. The selection list can be rendered with
 multiple columns/rows to present larger datasets in a more 
 manageable format.
 
-This plugin was developed to fulfil the requirements that arose
-from the [BBotUI Project].
-As such, while we do try to make the implementation as generic
-as possible, we dare not claim this plugin to be as flexible
-as one would expect a sensible jQuery plugin to be.
 
 There is much to be done on the flexibility and robustness front, 
 and we welcome contributions and bug fixes. Feel free to fork 
@@ -41,6 +36,5 @@ Copyright (c) 2010, Shawn Chin.
 This project is licensed under the [MIT license].
 
 
- [BBotUI Project]: https://github.com/shawnchin/bbotui "BBotUI project"
  [gentleSelect website]: http://shawnchin.github.com/jquery-gentleSelect "gentleSelect Website"
  [MIT License]: http://www.opensource.org/licenses/mit-license.php "MIT License"
