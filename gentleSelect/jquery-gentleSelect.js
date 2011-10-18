@@ -187,16 +187,20 @@
         // if select box was updated externally, we need to bring everything
         // else up to speed.
         update : function() {
-            var root = this;
-            var v = this.val(); // current value of select box
-            this.data("dialog").find("li").each(function() {
-                if ($(this).data("value") == v) {
-                    $(this).addClass("selected");
-                    root.data("label").text($(this).data("name"));
-                } else {
-                    $(this).removeClass("selected");
-                };
+            var opts = this.data("options");
+
+            // Update li with selected data
+            var v = (this.attr("multiple")) ? this.val() : [this.val()];
+            $("li", this.data("dialog")).each(function() {
+                var $li = $(this);
+                var isSelected = ($.inArray($li.data("value"), v) != -1);
+                $li.toggleClass("selected", isSelected);
             });
+
+            // Update label
+            var label = getSelectedAsText(this.find(":selected"), opts);
+            this.data("label").text(label);
+            
             return this;
         }
     };
