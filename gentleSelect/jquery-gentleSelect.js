@@ -216,11 +216,12 @@
         },
 
         labelClick : function() {
-            var pos = $(this).position();
-            var root = $(this).data("root");
+            var $this = $(this);
+            var pos = $this.position();
+            var root = $this.data("root");
             var opts = root.data("options");
             var dialog = root.data("dialog")
-                .css("top", pos.top + root.height())
+                .css("top", pos.top + $this.height())
                 .css("left", pos.left + 1);
             if (opts.openEffect == "fade") {
                 dialog.fadeIn(opts.openSpeed);
@@ -230,8 +231,9 @@
         },
     
         dialogHoverOut : function() {
-            if ($(this).data("root").data("options").hideOnMouseOut) {
-                $(this).hide();
+            var $this = $(this);
+            if ($this.data("root").data("options").hideOnMouseOut) {
+                $this.hide();
             }
         },
 
