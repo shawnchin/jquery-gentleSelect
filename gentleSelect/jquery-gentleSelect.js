@@ -240,11 +240,14 @@
         dialogClick : function(e) {
             var clicked = $(e.target);
             var $this = $(this);
-            var opts = $this.data("root").data("options");
-            if (opts.closeEffect == "fade") {
-                $this.fadeOut(opts.closeSpeed);
-            } else {
-                $this.slideUp(opts.closeSpeed);
+            var root = $this.data("root");
+            var opts = root.data("options");
+            if (!root.attr("multiple")) {
+                if (opts.closeEffect == "fade") {
+                    $this.fadeOut(opts.closeSpeed);
+                } else {
+                    $this.slideUp(opts.closeSpeed);
+                }
             }
 
             if (clicked.is("li") && !clicked.hasClass("gentleselect-dummy")) {
@@ -258,13 +261,13 @@
                     label.text(getSelectedAsText(s, opts));
                     var v = s.map(function(){ return $(this).data("value"); });
                     // update actual selectbox and trigger change event
-                    $this.data("root").val(v.get()).trigger("change");
+                    root.val(v.get()).trigger("change");
                 } else {
                     $this.find("li.selected").removeClass("selected");
                     clicked.addClass("selected");
                     label.text(clicked.data("name"));
                     // update actual selectbox and trigger change event
-                    $this.data("root").val(value).trigger("change");
+                    root.val(value).trigger("change");
                 }
             }
         },
