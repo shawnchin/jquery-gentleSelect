@@ -79,6 +79,12 @@
         return false;
     }
 
+    function optionOverrides(c, o) {
+        if (c.attr("multiple")) {
+            o.hideOnMouseOut = true; // must be true or dialog will never hide
+        }
+    }
+
     function getSelectedAsText(elemList, opts) { 
         // If no items selected, return prompt
         if (elemList.length < 1) { return opts.prompt; }
@@ -98,6 +104,7 @@
             var o = $.extend({}, defaults, options);
 
             if (hasError(this, o)) { return this; }; // check for errors
+            optionOverrides(this, o); // 
             this.hide(); // hide original select box
             
             // initialise <span> to replace select box
