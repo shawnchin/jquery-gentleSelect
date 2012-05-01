@@ -14,6 +14,8 @@
     
     cursor: pointer;
     color: #555;
+    
+    white-space; nowrap;
 }
 
 .gentleselect-label-highlight {
