@@ -60,6 +60,11 @@
             itemWidth: 100,
             hideOnMouseOut: false
         });
+        $('#example7').gentleSelect({ 
+            columns: 3,
+            itemWidth: 100,
+            disallowEmpty: true
+        });
     });
     </script>
 </head>
@@ -349,6 +354,47 @@
     });</pre>
     <p>
     This option has no effect if <tt>multiple</tt> is enabled on the selection box.
+    </p>
+    
+    <h3 id='option-disallowEmpty'>disallowEmpty</h3>
+    <p>
+    Specifies that at least one item must be selected at all times. This 
+    applies mainly when multiple selection is enabled. When this is 
+    enable users will not be able to deselect a sole selected item.This is 
+    <tt>false</tt> by default. Set to <tt>true</tt> to apply this rule.
+    </p>
+
+    <p>
+    Upon initialisation, the first element in the list of options will
+    be selected if none were previously selected.
+    </p>
+    
+    <p>
+    For example, <select id='example7' multiple='multiple'>
+        <option value="1">Apple</option>
+        <option value="2">Orange</option>
+        <option value="3">Banana</option>
+        <option value="4">Mango</option>
+        <option value="5">Pineapple</option>
+        <option value="6">Guava</option>
+        <option value="7">Grape</option>
+        <option value="8">Sugar Cane</option>
+        <option value="9">Durian</option>
+        <option value="10">Plum</option>
+        <option value="11">Apricot</option>
+        <option value="12">Cumquat</option>
+    </select> (the sole selected item cannot be deselected).
+    </p>
+    <pre>
+    $('#selector').gentleSelect({
+        columns: 3,
+        itemWidth: 100,
+        disallowEmpty: true
+    });</pre>
+
+    <p>
+    Applying <tt>disallowEmpty</tt> on a select box with no options will
+    result in an error being raised.
     </p>
     
     <h3 id='option-maxDisplay'>maxDisplay</h3>
