@@ -236,6 +236,16 @@
             
             updateState(this, opts);
             return this;
+        },
+        
+        // clear all selections
+        clear : function() {
+            // Deselect all options.
+            // http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-85676760
+            this[0].selectedIndex = -1;
+
+            // Update dialog
+            return methods["update"].call(this);
         }
     };
 
