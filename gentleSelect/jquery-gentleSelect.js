@@ -240,6 +240,12 @@
         
         // clear all selections
         clear : function() {
+            // Check for disallowEmpty option
+            if (this.data("options").disallowEmpty) {
+              $.error("gentleSelect: cannot use 'clear' when disallowEmpty=true");
+              return this;
+            }
+
             // Deselect all options.
             // http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-85676760
             this[0].selectedIndex = -1;
