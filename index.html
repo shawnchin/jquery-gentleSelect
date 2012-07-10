@@ -65,6 +65,13 @@
             itemWidth: 100,
             disallowEmpty: true
         });
+        $('#example8').gentleSelect({ 
+            columns: 3,
+            itemWidth: 100
+        });
+        $('#clear-example8').click(function() {
+            $('#example8').gentleSelect("clear");
+        });
     });
     </script>
 </head>
@@ -418,7 +425,37 @@
     <pre>
     // assssuming gentleSelect() previously initialised
     $('#selector').val(3).gentleSelect("update");</pre>
+    
+    <h3 id='method-clear'>clear</h3>
+    <p>
+    Clears all selections. For example:
+    <select id='example8'>
+        <option value="1">Apple</option>
+        <option value="2">Orange</option>
+        <option value="3">Banana</option>
+        <option value="4">Mango</option>
+        <option value="5">Pineapple</option>
+        <option value="6">Guava</option>
+        <option value="7">Grape</option>
+        <option value="8">Sugar Cane</option>
+        <option value="9">Durian</option>
+        <option value="10">Plum</option>
+        <option value="11">Apricot</option>
+        <option value="12">Cumquat</option>
+    </select>
+    <button id='clear-example8'>Clear</button>
+    </p>
+    
+    <pre>
+    // assssuming gentleSelect() previously initialised
+    $('#selector').gentleSelect("clear");</pre>
 
+    <p>
+    Note that this method is disabled when 
+    <tt></tt><a href='#option-disallowEmpty'>disallowEmpty</a></tt>
+    is set <tt>true</tt>.
+    </p>
+    
 </div>
 <div id='footer'>
 
