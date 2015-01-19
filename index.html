@@ -414,6 +414,51 @@
     The default value is <tt>0</tt> (no limit).
     
     </p>
+
+    <h3 id='option-url'>url</h3>
+    <p>
+    Dynamically load the contents of the drop down using AJAX. gentleSelect
+	sends a GET request to this URL. The server sends back a JSON array of  
+	objects. Each object has two keys: <tt>'label'</tt> and <tt>'value'</tt>.
+	<tt>'label'</tt> holds a string that the user sees in the drop down list.
+	<tt>'value'</tt> holds the actual value submitted when this item is 
+	selected.
+    </p>
+    <pre>
+    $('#selector').gentleSelect({
+        columns: 3,
+        itemWidth: 100,
+        url: 'http://example.com/list'
+    });</pre>
+
+	<p>
+	The returned JSON might look something like this...
+	</p>
+	<pre>
+    [{label:'One',value:'1'},{label:'Two',value:'2'},{label:'Three',value:'3'}]</pre>
+	
+	<p>
+	The <tt>selected</tt> key holds a boolean value. <tt>true</tt> makes that
+	item the current one.
+	</p>
+	<pre>
+    [{label:'One',value:'1',selected:false},{label:'Two',value:'2',selected:true}]</pre>
+	
+    <h3 id='option-urlData'>urlData</h3>
+    <p>
+	URL parameters passed along with the AJAX request. Use this when the drop
+	down list depends on another field. For example, the code below gets the 
+	options for client number <tt>1</tt> and not clients <tt>2</tt>, <tt>3</tt>,
+	etc.
+    </p>
+    <pre>
+    $('#selector').gentleSelect({
+        columns: 3,
+        itemWidth: 100,
+        url: 'http://example.com/list',
+        urlData: {client: 1}
+    });</pre>
+    
     <h2>Methods</h2>
     <h3 id='method-update'>update</h3>
     <p>
@@ -452,9 +497,30 @@
 
     <p>
     Note that this method is disabled when 
-    <tt></tt><a href='#option-disallowEmpty'>disallowEmpty</a></tt>
+    <tt><a href='#option-disallowEmpty'>disallowEmpty</a></tt>
     is set <tt>true</tt>.
     </p>
+
+    <h3 id='method-refresh'>refresh</h3>
+    <p>
+	Resend the AJAX request and replace the drop down list. This method uses the
+	<tt><a href='#option-url'>url</a></tt> option set during initialization. The refresh leaves the current
+	drop down in place if there is no URL.
+    </p>
+
+    <pre>
+    // refresh the drop down with the default options
+    $('#selector').gentleSelect("refresh");</pre>
+
+    <pre>
+    // refresh the drop down with different urlData
+    $('#selector').gentleSelect("refresh", {client: 1});</pre>
+	
+	<p>
+	<tt>refresh</tt> automatically calls the <tt><a href='#method-update'>
+	update</a></tt> method. The gentleSelect label displays the correct item 
+	when <tt>refresh</tt> finishes.
+	</p>
     
 </div>
 <div id='footer'>
